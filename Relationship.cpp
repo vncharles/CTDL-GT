@@ -2,8 +2,6 @@
 #include<math.h>
 #include <string>
 using namespace std;
-#define FAST                            ios_base::sync_with_stdio(false); cin.tie(nullptr);
-#define RW       						freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
 
 struct Node {
 	int data;
@@ -87,7 +85,7 @@ void addXinY(List &l, int y, int x){
 	}
 }
 
-void rmfirst(List &l){
+void deleteFirst(List &l){
 	if(l.first != NULL){
 		Node *p = l.first;
 		l.first = p->link;
@@ -118,7 +116,7 @@ void deletex(List &l, int x){
 	
 	while(p != NULL){
 		if(l.first->data == x) {
-			rmfirst(l);
+			deleteFirst(l);
 			break;
 		}
 		if(l.last->data == x){
@@ -133,26 +131,6 @@ void deletex(List &l, int x){
 			break;
 		}
 		p = p->link;
-
-		
-		// if(p == l.first && p->link == NULL) {
-		// 	rmfirst(l);
-		// 	break;
-		// }
-		// if(p->link->data != x || p->link != NULL){
-		// 	p = p->link;
-		// 	if(p != NULL) continue;
-		// }
-		
-		// if(p->link == l.last) {
-		// 	deleteLast(l);
-		// 	break;
-		// } else {
-		// 	q = p->link;
-		// 	p->link = q->link;
-		// 	delete(q);
-		// 	break;
-		// }
 	}
 	
 }
@@ -167,20 +145,11 @@ void deleteAll(List &l){
 	l.last = NULL;
 }
 
-// Ham kiem tra nguyen to
-bool checkPrime(int x){
-	if(x == 2) return true;
-	for(int i = 2; i < sqrt(x) + 1; i++){
-		if(x % i == 0) return false;
-	}
-	return true;
-}
-
 void nhap(List &l){
-	int n, x;
-	cout << "Nhap n: "; cin >> n;
-	while(n--){
+	int x;
+	while(true){
 		cin >> x;
+		if(x == -1) break;
 		addLast(l, x);
 	}
 }
@@ -228,17 +197,75 @@ void interchangeSort(List &l){
 	}
 }
 
+// Quick sort
+
+void addFirstQS(List &l, Node *p){
+	// Node* p = getNode(x);
+	if(p != NULL){
+		if(l.first == NULL) {
+		    l.first = p;
+		    l.last = p;
+		}
+		else{
+			p->link = l.first; 
+			l.first = p;
+		}
+
+	}
+}
+
+void quick_sort(List &l) {        
+	List l1, l2;  
+	if(l.first==NULL) return;  
+	initList(l1);  
+	initList(l2);  
+	Node *x=l.first;  
+	l.first = x->link;  
+	while(l.first!=NULL){  
+			Node *p=l.first;  
+			l.first = p->link;  
+			p->link = NULL;  
+			if(p->data <= x->data)  
+					addFirstQS(l1,p);  
+			else  
+					addFirstQS(l2,p);  
+	}  
+	quick_sort(l1);  
+	quick_sort(l2);  
+	if(l1.first==NULL)  
+			l.first=x;  
+	else  {  
+		l.first = l1.first;  
+		l1.last->link = x;  
+	}  
+	x->link = l2.first;  
+
+	if(l2.first==NULL)  
+		l.last = x;  
+	else {  
+		l.last = l2.last;  
+	}  
+}  
+
+
 int main(){
-	// RW;
+	
 	List l;
 	initList(l);
 
-	nhap(l);
+	// nhap(l);
 	// rmfirst(l);
 	// deleteLast(l);
-	deletex(l, 6);
+	// deletex(l, 6);
 	// deleteAll(l);
 	// interchangeSort(l);
+	addLast(l, 5);
+	addLast(l, 2);
+	addLast(l, 4);
+	addLast(l, 1);
+	addLast(l, 8);
+	addLast(l, 7);
+	quick_sort(l);
 	printList(l);
 
 	// cout << "\n";
