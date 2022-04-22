@@ -1,2 +1,1 @@
-
-	int flag = 1;
+Count

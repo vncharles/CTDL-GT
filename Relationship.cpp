@@ -3,6 +3,8 @@
 #include <string>
 using namespace std;
 
+
+// khởi tạo
 struct Node {
 	int data;
 	Node *link;
@@ -30,6 +32,7 @@ Node* getNode(int x){
 	return p;
 }
 
+
 // tim kiem
 Node* search(List l, int x){
 	Node* p = l.first;
@@ -40,7 +43,7 @@ Node* search(List l, int x){
 	return NULL;
 } 
 
-// them gia tri x node va dua no vo dau cua list
+// các hàm thêm node
 void addFirst(List &l, int x){
 	Node* p = getNode(x);
 	if(p != NULL){
@@ -85,6 +88,7 @@ void addXinY(List &l, int y, int x){
 	}
 }
 
+// các hàm về xoá node
 void deleteFirst(List &l){
 	if(l.first != NULL){
 		Node *p = l.first;
@@ -135,6 +139,7 @@ void deletex(List &l, int x){
 	
 }
 
+
 void deleteAll(List &l){
 	Node *p;
 	while(l.first != NULL){
@@ -145,6 +150,8 @@ void deleteAll(List &l){
 	l.last = NULL;
 }
 
+
+// xủ lí nhập xuất
 void nhap(List &l){
 	int x;
 	while(true){
@@ -163,6 +170,8 @@ void printList(List l){
 	}
 }
 
+
+// tìm max
 Node* max(List l){
 	Node* maxx = l.first;
 	Node* p = l.first->link;
@@ -173,7 +182,7 @@ Node* max(List l){
 	return maxx;
 
 }
-
+// tìm min
 Node* min(List l){
 	Node* minn = l.first;
 	Node* p = l.first->link;
@@ -185,20 +194,7 @@ Node* min(List l){
 
 }
 
-void interchangeSort(List &l){
-	for(Node *i = l.first; i != l.last; i = i->link){
-		for(Node *j = i->link; j != NULL; j = j->link){
-			if(i->data > j->data){
-				int tam = i->data;
-				i->data = j->data;
-				j->data = tam;
-			}
-		}
-	}
-}
-
 // Quick sort
-
 void addFirstQS(List &l, Node *p){
 	// Node* p = getNode(x);
 	if(p != NULL){
@@ -213,7 +209,6 @@ void addFirstQS(List &l, Node *p){
 
 	}
 }
-
 void quick_sort(List &l) {        
 	List l1, l2;  
 	if(l.first==NULL) return;  

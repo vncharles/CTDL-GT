@@ -9,8 +9,6 @@ void swap(int *a, int *b){
 	*a = *b;
 	*b = tam;
 }
-
-
 // Sap xep tang dan dua min ve dau
 void interchangeSort(int a[], int n){
 	for(int i = 0; i < n - 1; i++)
@@ -126,12 +124,13 @@ void insertionSort2(int a[], int n){
 void bubleSort1(int a[], int n){
 	int fl = 1;
 	for(int i = 0; i < n - 1; i++){
+		fl = 1;
 		for(int j = 0; j < n - i - 1; j++)
 			if(a[j] > a[j + 1]) {
 				swap(a[j], a[j + 1]);
 				fl = 0;
 			}
-		if(fl) break;
+		if(fl==1) break;
 	}
 }
 
@@ -219,7 +218,7 @@ void bubleSortName(SinhVien a[], int n){
 }
 
 // QuickSort
-int partition (int arr[], int low, int high){
+int partition (NhanVien arr[], int low, int high){
     int pivot = arr[high];
     int left = low;
     int right = high - 1;
@@ -237,7 +236,6 @@ int partition (int arr[], int low, int high){
 void quickSort(NhanVien arr[], int low, int high){
     if (low < high){
         int pi = partition(arr, low, high);
-
         quickSort(arr, low, pi - 1);
         quickSort(arr, pi + 1, high);
     }

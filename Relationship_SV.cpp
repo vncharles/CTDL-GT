@@ -84,14 +84,6 @@ int inputSV(SinhVien &sv){
 	return 1;
 }
 
-void printSV(SinhVien sv){
-	// cout << sv.mssv << " ";
-	// cout << sv.surName << " ";
-	// cout << sv.firstName << " ";
-	// cout << sv.DTB << "\n";
-	printf("|%9s | %-14s| %-8s|%6.2lf |\n", sv.mssv, sv.surName, sv.firstName, sv.DTB);
-}
-
 void inputArray(List &list){
 	int flag = 1;
 	SinhVien sv;
@@ -99,6 +91,14 @@ void inputArray(List &list){
 		flag = inputSV(sv);
 		if(flag && searchSV(list, sv) == NULL) addLast(list, sv);
 	}
+}
+
+void printSV(SinhVien sv){
+	// cout << sv.mssv << " ";
+	// cout << sv.surName << " ";
+	// cout << sv.firstName << " ";
+	// cout << sv.DTB << "\n";
+	printf("|%9s | %-14s| %-8s|%6.2lf |\n", sv.mssv, sv.surName, sv.firstName, sv.DTB);
 }
 
 void outputArray(List list){
@@ -196,6 +196,19 @@ void deleteSV(List &l, char ma[]){
 		p = p ->link;
 	}
 }
+
+void addLast(List &l, SinhVien x){
+	Node* p = getNode(x);
+	if(p != NULL){
+		if(l.last == NULL) l.first = l.last = p;
+		else{
+			l.last->link = p; 
+			l.last = p;
+		}
+
+	}
+}
+
 
 int main(){
 	List list;
